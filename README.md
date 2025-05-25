@@ -101,3 +101,29 @@ It returns:
 - A concise, grammatically correct `description`
 
 
+#### 2. Embedding Model (all-MiniLM-L6-v2)
+We convert the `cleaned_name` and its `description` into vector embeddings using the sentence-transformer model:  
+**`all-MiniLM-L6-v2`**  
+These embeddings capture the **semantic meaning** of the room and allow us to compare rooms beyond exact wording.
+
+We selected MiniLM for its speed and strong accuracy given its small size (only ~22 MB) which is ideal for real-time matching at scale.
+
+
+#### 3. FAISS Vector Store:
+
+- **Reference room embeddings** are precomputed and stored (offline).
+- **Supplier rooms** are embedded and compared **on the fly** (**online**).
+
+Using **FAISS** allows us to search through thousands of rooms efficiently via similarity search.
+
+---
+### Matching Results & Evaluation
+We use **cosine similarity** between the embeddings to find the closest supplier match for each reference room.
+
+- A **high similarity score** indicates a strong match between the room descriptions.
+- If multiple supplier rooms yield very close similarity scores, these cases are **flagged for deeper review**.
+
+---
+### Next Steps: 
+- LLM-based Tie-breaker: Introduce an LLM-driven verification step for ambiguous cases. For example, when the top results have similar scores, an LLM can take the reference description and the top-N supplier descriptions and judge which supplier room best matches the reference (using a specialized prompt). This can further improve precision by handling edge cases with nuanced differences especially when dealing with `cosine`. 
+- Scaling to Multiple Suppliers: This use case only showcases one supplier: `Expedia` but we can enrich the data with more suppliers and see how the model performs to simulate a real life scenario. 
