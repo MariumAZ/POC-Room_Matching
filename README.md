@@ -16,6 +16,20 @@ Install required packages:
 pip install pandas sentence-transformers faiss-cpu groq
 ```
 
+### 🔑 GroqCloud API Setup
+1. Sign up at https://groq.com/groqcloud/ and obtain your API key.
+
+2. Add your API key as an environment variable:
+
+    ✅ In Google Colab:
+    ```python
+    import os
+    os.environ["GROQ_API_KEY"] = "your-api-key"
+    ```
+    ✅ Locally (in your terminal):
+    ```bash
+    os.environ["GROQ_API_KEY"] = "your-api-key"
+    ```
 
 
 ## 🧠 Methodology
