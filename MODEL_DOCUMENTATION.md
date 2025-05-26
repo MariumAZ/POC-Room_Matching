@@ -38,8 +38,6 @@ To prepare the datasets for room matching, we applied several filtering and tran
 
 ## 🧠 Model Architecture
 
-![architecture](images/architecture.jpg)
-
 ### 1. LLM Enrichment (GroqCloud LLaMA3-70B)
 
 We used GroqCloud's `llama3-70b-8192` to generate structured descriptions for each room. It extracts:
@@ -56,6 +54,7 @@ The model returns:
 ### 2. Embedding Model (`all-MiniLM-L6-v2`)
 
 We convert the cleaned name + description into vector embeddings using a lightweight sentence transformer. This captures **semantic similarity** rather than just string overlap.
+We selected MiniLM for its speed and strong accuracy given its small size (only ~22 MB), which is ideal for real-time matching at scale.
 
 ### 3. FAISS Vector Store
 
@@ -63,6 +62,14 @@ We convert the cleaned name + description into vector embeddings using a lightwe
 - **Supplier rooms**: embedded and searched live  
 
 We use **FAISS with cosine similarity** (via inner product on normalized vectors) for fast and accurate matching.
+
+
+![architecture](images/architecture.jpg)
+
+
+This architecture combines the strengths of LLMs and embeddings. The LLM handles language variability (adding context, standardizing terms) so that the embedding model receives clean, informative text.
+
+The embedding model then produces vectors that make similar rooms cluster together in vector space, enabling the FAISS index to quickly find the best match.
 
 ---
 
