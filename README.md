@@ -27,9 +27,12 @@ pip install pandas sentence-transformers faiss-cpu groq
 2. Add your API key as an environment variable:
 
     ✅ In Google Colab:
+
+    Add a secret key under secrets.
+
     ```python
-    import os
-    os.environ["GROQ_API_KEY"] = "your-api-key"
+    from google.colab import userdata
+   groq_token=userdata.get('your-api-key-name')
     ```
     ✅ Locally (in your terminal):
     ```bash
