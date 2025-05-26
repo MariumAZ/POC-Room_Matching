@@ -29,7 +29,7 @@ To prepare the datasets for room matching, we applied several filtering and tran
    We selected properties with 2–29 rooms from both sources to balance complexity and cost.
 
 7. **Removing Perfect Duplicates Across Sources**  
-   Properties with identical room names across sources were excluded to test only non-trivial mappings.
+   Properties with identical room names across sources were excluded to test non-trivial mappings as well as see how the model handles them.
 
 8. **Selecting a Representative Example**  
    Property at row `28` was chosen for the proof of concept, as it contained both matching and mismatching room names.
@@ -56,10 +56,11 @@ The model returns:
 We convert the cleaned name + description into vector embeddings using a lightweight sentence transformer. This captures **semantic similarity** rather than just string overlap.
 We selected MiniLM for its speed and strong accuracy given its small size (only ~22 MB), which is ideal for real-time matching at scale.
 
+- **Reference room embeddings**: precomputed (offline) 
+- **Supplier rooms**: embedded and searched (online)
+- 
 ### 3. FAISS Vector Store
 
-- **Reference room embeddings**: precomputed offline  
-- **Supplier rooms**: embedded and searched live  
 
 We use **FAISS with cosine similarity** (via inner product on normalized vectors) for fast and accurate matching.
 

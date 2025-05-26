@@ -34,14 +34,10 @@ pip install pandas sentence-transformers faiss-cpu groq
     from google.colab import userdata
    groq_token=userdata.get('secretName')
     ```
-    ✅ Locally: 
-    ```python
-    import os
-    os.environ["GROQ_API_KEY"] = "your-api-key"
-    ```
 ### Data
+
 Intially we have two csv files : 
-- For reference properties
-- For suppliers
+- Reference room names csv.
+- Supplier room names csv. 
 
 
