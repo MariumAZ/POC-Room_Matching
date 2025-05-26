@@ -120,10 +120,23 @@ Using **FAISS** allows us to search through thousands of rooms efficiently via s
 ### Matching Results & Evaluation
 We use **cosine similarity** between the embeddings to find the closest supplier match for each reference room.
 
+
+<div align="center">
+  <img src="images/match_ref.png" alt="room matching" width="400"/>
+</div>
+
+
+
 - A **high similarity score** indicates a strong match between the room descriptions.
 - If multiple supplier rooms yield very close similarity scores, these cases are **flagged for deeper review**.
 
 ---
 ### Next Steps: 
 - LLM-based Tie-breaker: Introduce an LLM-driven verification step for ambiguous cases. For example, when the top results have similar scores, an LLM can take the reference description and the top-N supplier descriptions and judge which supplier room best matches the reference (using a specialized prompt). This can further improve precision by handling edge cases with nuanced differences especially when dealing with `cosine`. 
+
+<div align="center">
+  <img src="images/pass.png" alt="room matching" width="200"/>
+</div>
+
+
 - Scaling to Multiple Suppliers: This use case only showcases one supplier: `Expedia` but we can enrich the data with more suppliers and see how the model performs to simulate a real life scenario. 
