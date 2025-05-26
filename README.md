@@ -121,8 +121,19 @@ We selected MiniLM for its speed and strong accuracy given its small size (only 
 Using **FAISS** allows us to search through thousands of rooms efficiently via similarity search.
 
 ---
-### Matching Results & Evaluation
+
+### 🔍 Model Evaluation Summary
+
 We use **cosine similarity** between the embeddings to find the closest supplier match for each reference room.
+
+
+- **Total Matches Evaluated**: 18  
+- ✅ **Exact Match Accuracy**: 77.78% (14/18)  
+- 🟡 **Soft Accuracy** (score ≥ 0.9): 77.78% (14/18)  
+- 📊 **Average Score**: 0.944  
+- ⚠️ **Low-Confidence Matches** (< 0.9): 4
+
+A **high similarity score** indicates a strong match between the room descriptions.
 
 
 <div align="center">
@@ -130,9 +141,8 @@ We use **cosine similarity** between the embeddings to find the closest supplier
 </div>
 
 
+If multiple supplier rooms yield very close similarity scores, these cases are **flagged for deeper review**.
 
-- A **high similarity score** indicates a strong match between the room descriptions.
-- If multiple supplier rooms yield very close similarity scores, these cases are **flagged for deeper review**.
 
 ---
 ### Next Steps: 
