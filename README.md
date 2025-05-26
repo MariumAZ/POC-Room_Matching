@@ -32,10 +32,11 @@ pip install pandas sentence-transformers faiss-cpu groq
 
     ```python
     from google.colab import userdata
-   groq_token=userdata.get('your-api-key-name')
+   groq_token=userdata.get('secretName')
     ```
-    ✅ Locally (in your terminal):
-    ```bash
+    ✅ Locally: 
+    ```python
+    import os
     os.environ["GROQ_API_KEY"] = "your-api-key"
     ```
 ### Data
@@ -125,7 +126,7 @@ We use **cosine similarity** between the embeddings to find the closest supplier
 
 
 <div align="center">
-  <img src="images/match_ref.png" alt="room matching" width="400"/>
+  <img src="images/match_ref.png" alt="room matching" width="600"/>
 </div>
 
 
